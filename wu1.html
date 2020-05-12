@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.link {
+  fill: none;
+  stroke: #666;
+  stroke-width: 1.5px;
+}
+
+#licensing {
+  fill: green;
+}
+
+.link.licensing {
+  stroke: green;
+}
+
+.link.resolved {
+  stroke-dasharray: 0,2 1;
+}
+
+circle {
+  fill: #ccc;
+  stroke: #333;
+  stroke-width: 1.5px;
+}
+
+text {
+  font: 12px Microsoft YaHei;
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+}
+
+.linetext {
+    font-size: 12px Microsoft YaHei;
+}
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+// http://blog.thomsonreuters.com/index.php/mobile-patent-suits-graphic-of-the-day/
+var links = [
+  {source: "孙坚", target: "孙策", type: "resolved", rela:"父子"},
+  {source: "孙坚", target: "孙权", type: "resolved", rela:"父子"},
+  {source: "孙坚", target: "孙尚香", type: "resolved", rela:"父女"},
+  {source: "孙坚", target: "韩当", type: "resolved", rela:"领导"},
+  {source: "孙坚", target: "丁奉", type: "resolved", rela:"领导"},
+  {source: "孙坚", target: "朱治", type: "resolved",rela:"领导"},
+  {source: "孙策", target: "孙尚香", type: "resolved",rela:"兄妹"},
+  {source: "孙策", target: "孙权", type: "resolved", rela:"兄弟"},
+  {source: "孙策", target: "周喻", type: "resolved", rela:"领导"},
+  {source: "孙策", target: "程普", type: "resolved", rela:"领导"},
+  {source: "孙策", target: "韩当", type: "resolved", rela:"领导"},
+  {source: "孙策", target: "蒋钦", type: "resolved", rela:"领导"},
+  {source: "孙策", target: "周泰", type: "resolved", rela:"领导"},
+  {source: "孙策", target: "太史慈", type: "resolved", rela:"领导"},
+  {source: "孙策", target: "丁奉", type: "resolved", rela:"领导"},
+  {source: "孙策", target: "张昭", type: "resolved", rela:"领导"},
+  {source: "孙策", target: "张纮", type: "resolved", rela:"领导"},
+  {source: "孙策", target: "大乔", type: "resolved", rela:"夫妻"},
+  {source: "孙策", target: "贺齐", type: "resolved", rela:"领导"},
+  {source: "孙策", target: "董袭", type: "resolved", rela:"领导"},
+  {source: "孙策", target: "朱治", type: "resolved", rela:"领导"},
+  {source: "孙策", target: "吕范", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "孙尚香", type: "resolved", rela:"兄妹"},
+  {source: "孙权", target: "孙亮", type: "resolved", rela:"父子"},
+  {source: "孙权", target: "周瑜", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "吕蒙", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "陆逊", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "黄盖", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "程普", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "韩当", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "蒋钦", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "周泰", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "甘宁", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "太史慈", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "徐盛", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "丁奉", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "鲁肃", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "张昭", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "张纮", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "顾雍", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "诸葛瑾", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "诸葛恪", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "潘璋", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "凌统", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "阚泽", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "凌操", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "贺齐", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "董袭", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "朱桓", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "朱然", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "步骘", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "陆绩", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "薛综", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "朱治", type: "resolved", rela:"领导"},
+  {source: "孙权", target: "吕范", type: "resolved", rela:"领导"},
+  {source: "周瑜", target: "吕蒙", type: "resolved", rela:"领导"},
+  {source: "周瑜", target: "程普", type: "resolved", rela:"领导"},
+  {source: "周瑜", target: "小乔", type: "resolved", rela:"夫妻"},
+  {source: "周瑜", target: "诸葛亮", type: "resolved", rela:"对手"},
+  {source: "陆逊", target: "大乔", type: "resolved", rela:"岳母女婿"},
+  {source: "陆逊", target: "陆绩", type: "resolved", rela:"叔侄"},
+  {source: "大乔", target: "小乔", type: "resolved", rela:"姐妹"},
+  {source: "陆绩", target: "庞统", type: "resolved", rela:"朋友"},
+  {source: "凌操", target: "凌统", type: "resolved", rela:"父子"},
+  {source: "潘璋", target: "马忠", type: "resolved", rela:"领导"},
+  {source: "诸葛瑾", target: "诸葛恪", type: "resolved", rela:"父子"},
+  {source: "诸葛瑾", target: "诸葛亮", type: "resolved", rela:"兄弟"},
+  {source: "孙亮", target: "诸葛恪", type: "resolved", rela:"领导"},
+  {source: "鲁肃", target: "吕蒙", type: "resolved", rela:"朋友"},
+  {source: "孙尚香", target: "刘备", type: "resolved", rela:"夫妻"},
+  {source: "张昭", target: "张纮", type: "resolved", rela:"二张"}
+
+];
+
+
+</script>
+</html>

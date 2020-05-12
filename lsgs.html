@@ -1,0 +1,1555 @@
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8"> 
+
+<title> 三国演义可视化</title> 
+
+ <style>  @keyframes typing {
+
+    from { width: 0}
+
+}
+
+@keyframes blink-caret {
+
+    50% { border-color: transparent; }
+
+}
+
+ 
+
+.typeing {
+
+    font: 200% monospace;
+
+    font-size: 40px;
+
+    font-family: "楷体";
+
+    border-right: .08em solid;
+
+    width: 100ch;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    animation: typing 4s steps(40, end),
+
+               blink-caret .5s step-end infinite alternate; //这里的alternate是为了让光标闪烁的正常一点
+
+}</style>
+
+    <style id="css">
+
+        #wrap{width:200px; height:200px; border:2px solid #000; margin:100px auto;border-radius:50%; position:relative;}
+
+        #wrap ul{margin:0; padding:0; height:200px; position:relative; list-style:none;}
+
+        #wrap ul li{width:2px;  height:6px; background:#000; position:absolute; left:99px; top: 0;-webkit-transform-origin:center 100px;}
+
+        /*#wrap ul li:nth-of-type(1){-webkit-transform: rotate(0);}
+
+        #wrap ul li:nth-of-type(2){-webkit-transform: rotate(6deg);}
+
+        #wrap ul li:nth-of-type(3){-webkit-transform: rotate(12deg);}
+
+        #wrap ul li:nth-of-type(4){-webkit-transform: rotate(18deg);}
+
+        #wrap ul li:nth-of-type(5){-webkit-transform: rotate(24deg);}
+
+        #wrap ul li:nth-of-type(6){-webkit-transform: rotate(30deg);}
+
+        #wrap ul li:nth-of-type(7){-webkit-transform: rotate(36deg);}
+
+        #wrap ul li:nth-of-type(8){-webkit-transform: rotate(42deg);}*/
+
+        #wrap ul li:nth-of-type(5n+1){ height:12px;}
+
+        #hour{width:6px;  height:45px; background:#000; position:absolute; left:97px; top:55px;-webkit-transform-origin:bottom ;}
+
+        #min{width:4px;  height:65px; background:#999; position:absolute; left:98px; top:35px;-webkit-transform-origin:bottom ;}
+
+        #sec{width:2px;  height:80px; background:red; position:absolute; left:99px; top:20px;-webkit-transform-origin:bottom ;}
+
+        .icon{width:20px; height:20px; background:#000; border-radius:50%; position:absolute; left:90px; top: 90px;}
+
+ 
+
+    </style>
+
+<style>
+
+* {
+
+    box-sizing: border-box;
+
+}
+
+body {
+
+    margin: 0;
+
+}
+
+    .clear{
+
+        clear:both;
+
+    }
+
+.button {
+
+    background-color: #4CAF50; /* Green */
+
+    border: none;
+
+    color: white;
+
+    padding: 15px 32px;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    display: inline-block;
+
+    font-size: 16px;
+
+    margin: 4px 2px;
+
+    cursor: pointer;
+
+    
+
+}
+
+
+
+.button2 {background-color: #008CBA;} /* Blue */
+
+.button3 {background-color: #f44336;} /* Red */ 
+
+.button4 {background-color: #e7e7e7; color: black;} /* Gray */ 
+
+.button5 {background-color: #555555;} /* Black */
+
+.header {
+
+    background-color:#787F87;
+
+    color:white;
+
+    height:100%;
+
+    text-align: center;
+
+    padding: 25px;
+
+    margin: auto;
+
+    width:100%;
+
+
+
+}
+
+.headtop{
+
+    float: none;
+
+    width:110px;
+
+    height:20px;
+
+  
+
+    background-color: aliceblue;}
+
+.headerleft{
+
+    float: left;
+
+    width:300px;
+
+    height: auto;
+
+    display:block;
+
+    background-color:gray; 
+
+    }
+
+    .headermiddle{
+
+        float: left;
+
+        width:500px;
+
+        height:auto;
+
+        background-color:gray;
+
+        
+
+    }
+
+.headerright{
+
+    float: left;
+
+    width:300px;
+
+    background-color: gray;
+
+    }
+
+.footer {
+
+    background-color: #444;
+
+    color: white;
+
+    padding: 15px;
+
+    width:100%;
+
+    position:fixed;
+
+    bottom: 0;
+
+}
+
+.centre{
+
+        text-align: center;
+
+        background-color:white;
+
+        padding: 10px;height: 100px;
+
+    float: right;
+
+    }
+
+.topmenu {
+
+    list-style-type: none;
+
+    margin: 0;
+
+    padding: 0;
+
+    overflow: hidden;
+
+    background-color: #777;
+
+}
+
+.topmenu li {
+
+    float: left;
+
+}
+
+.topmenu li a {
+
+    display: inline-block;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 16px;
+
+    text-decoration: none;
+
+}
+
+.topmenu li a:hover {
+
+    background-color: #222;
+
+}
+
+.topmenu li a.active {
+
+    color: white;
+
+    background-color: #4CAF50;
+
+}
+
+.column {
+
+    float: left;
+
+    height:675px;
+
+    padding: 15px;
+
+}
+
+.clearfix::after {
+
+    content: "";
+
+    clear: both;
+
+    display: table;
+
+}
+
+.sidemenu {
+
+    width: 25%;
+
+}
+
+.content {
+
+    width: 75%;
+
+}
+
+.side{
+
+        width:100%;
+
+        height:250px; 
+
+    }
+
+.sidemenu ul {
+
+    list-style-type: none;
+
+    margin: 0;
+
+    padding: 0;
+
+    height: auto;
+
+}
+
+.sidemenu li a {
+
+    margin-bottom: 4px;
+
+    display: block;
+
+    padding: 8px;
+
+    background-color: #eee;
+
+    text-decoration: none;
+
+    color: #666;
+
+}
+
+.sidemenu li a:hover {
+
+    background-color: #555;
+
+    color: white;
+
+}
+
+.sidemenu li a.active {
+
+    background-color: #008CBA;
+
+    color: white;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+    <script type="text/javascript" src="me.js" ></script>
+
+<ul class="topmenu">
+
+  <li><a href="#home" class="active">人物可视化</a></li>
+
+  <li><a href="book.html">人物搜索</a></li>
+
+  <li><a href="lsgs.html">时间轴</a></li>
+
+  <li><a href="https://blog.csdn.net/qq_41722524">历史故事</a></li>
+
+  <li><a href="me.html">小组成员</a></li>
+
+</ul>
+
+
+
+<div class="clearfix">
+
+  <div class="column sidemenu">
+
+    <ul>
+
+      <li><a href="solar.html" style="background:#14CEEB "><strong>点进去可以看到太阳系哦</strong></a></li>
+
+      <li><a href="" class="active"><b>人物可视化</b></a></li>
+
+      <li><a href="课程表.html"><b> 人物搜索</b></a></li>
+
+      <li><a href="sjz.html"><b>时间轴</b></a></li>
+
+      <li><a href="wei.html"><b>魏国</b></a></li>
+
+      <li><a href="shu.html"><b>蜀国</b></a></li>
+
+      <li><a href="wu.html"><b>吴国</b></a></li>
+
+
+
+    </ul>   
+
+    <div class="side">    <div id="wrap">
+
+    <ul id="list">
+
+        <!--<li></li>
+
+        <li></li>
+
+        <li></li>
+
+        <li></li>
+
+        <li></li>
+
+        <li></li>
+
+        <li></li>
+
+        <li></li>-->
+
+    </ul>
+
+        <div id="hour"></div>
+
+        <div id="min"></div>
+
+        <div id="sec"></div>
+
+        <div class="icon"></div>
+
+    </div>
+
+       <script>
+
+        var oList=document.getElementById("list");//获取到刻度
+
+        var oCss=document.getElementById("css");
+
+        var oHour=document.getElementById("hour");//获取时针
+
+        var oMin=document.getElementById("min");//获取分针
+
+        var oSec=document.getElementById("sec");//获取秒针
+
+        var oLi="";
+
+        var sCss="";
+
+        for (var i=0;i<60;i++) { //一个表盘总共是60个刻度
+
+            sCss+="#wrap ul li:nth-of-type("+(i+1)+"){-webkit-transform: rotate("+i*6+"deg);}";
+
+            oLi+="<li></li>";
+
+        };
+
+        oList.innerHTML=oLi;
+
+        oCss.innerHTML+=sCss;//表盘刻度渲染完成
+
+        toTime();
+
+        setInterval(toTime,1000);
+
+        function toTime(){
+
+            var oDate=new Date();//获取当前时间
+
+            var iSec=oDate.getSeconds();//获取当前秒
+
+            var iMin=oDate.getMinutes()+iSec/60;//获取当前分
+
+            var iHour=oDate.getHours()+iMin/60;//获取当前时
+
+            oSec.style.WebkitTransform="rotate("+iSec*6+"deg)";//秒针转动角度1秒6度 (表盘一圈360度一圈60秒所以一秒6度)
+
+            oMin.style.WebkitTransform="rotate("+iMin*6+"deg)";//分钟转动角度1分6度 (表盘一圈360度一圈60分所以一分6度)
+
+            oHour.style.WebkitTransform="rotate("+iHour*30+"deg)";//时针转动角度一小时30度(表盘一圈360度一圈12小时所以一小时30度)
+
+        };
+
+</script>
+
+</div>
+
+  </div>
+
+
+
+  <div class="column content">
+
+      <div class="header"> 
+
+          <br><br>
+
+        <div class="headerleft"></div>
+
+        <div class="headermiddle"></div>
+
+        <div class="headerright"></div>
+
+          <div class="clear"></div>
+
+          <br><br><br>
+
+
+
+
+<html lang="zh-CN">
+
+  <head>
+
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+ 
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style type="text/css">
+
+      html,body{
+
+        background-color: #ddd;
+
+      }
+
+      .month_svg{
+
+        height: 400px;
+
+        width: 1200px;
+
+        margin: 50px auto;
+
+        background-color: white
+
+      }
+
+      .month_svg .axis path, .month_svg .axis line {
+
+       stroke: black;
+
+       fill: none;
+
+      }
+
+      .node {
+
+          cursor: pointer;
+
+      }
+
+ 
+
+      .overlay{
+
+          background-color:#EEE;
+
+      }
+
+      .node.active{
+
+          fill:#f00;
+
+          stroke: #f00;
+
+      }
+
+      .node.active circle{
+
+          fill: #f00;
+
+          stroke: #f00;
+
+      }
+
+      .node circle {
+
+          fill: #fff;
+
+          stroke: steelblue;
+
+          stroke-width: 1.5px;
+
+      }
+
+ 
+
+      .node text {
+
+          font-size:14px;
+
+          font-family:sans-serif;
+
+      }
+
+ 
+
+      .link {
+
+          fill: none;
+
+          stroke: #ccc;
+
+          stroke-width: 1.5px;
+
+      }
+
+ 
+
+      .templink {
+
+          fill: none;
+
+          stroke: red;
+
+          stroke-width: 3px;
+
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+
+    
+
+    <div id="tree-container" class="month_svg">
+
+      
+
+    </div>
+
+ 
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script></script>
+
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+
+    <script type="text/javascript">
+
+     //节点数据
+
+      var treeData = { 
+
+        user_name: "人员",
+
+        radius: "4",
+
+        lineColor: "#999999", 
+
+        strokeColor: "#999999", 
+
+        fillColor: "#999999", 
+
+        employee_id: "", 
+
+        children: [
+
+          {
+
+            user_name: "张三",
+
+            lineColor: "#999999", 
+
+            strokeColor: "#1E9FFF", 
+
+            fillColor: "#1E9FFF", 
+
+            employee_id: "",
+
+            radius: 4,
+
+            children: [
+
+              {
+
+                user_name: "张四",
+
+                lineColor: "#999999", 
+
+                strokeColor: "#1E9FFF", 
+
+                fillColor: "#1E9FFF", 
+
+                employee_id: "",
+
+                radius: 4,
+
+                children: [
+
+                  {
+
+                    user_name: "张六",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "张七",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                ]
+
+              },
+
+              {
+
+                user_name: "张五",
+
+                lineColor: "#999999", 
+
+                strokeColor: "#1E9FFF", 
+
+                fillColor: "#1E9FFF", 
+
+                employee_id: "",
+
+                radius: 4,
+
+                children: [
+
+                  {
+
+                    user_name: "张八",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "张九",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李六",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李七",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李十",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李十一",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李十二",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李十三",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                ]
+
+              },
+
+            ]
+
+          },
+
+          {
+
+            user_name: "李四",
+
+            lineColor: "#999999", 
+
+            strokeColor: "#999999", 
+
+            fillColor: "#1E9FFF", 
+
+            employee_id: "",
+
+            radius: 4,
+
+            children: [
+
+              {
+
+                user_name: "李五",
+
+                lineColor: "#999999", 
+
+                strokeColor: "#1E9FFF", 
+
+                fillColor: "#1E9FFF", 
+
+                employee_id: "",
+
+                radius: 4,
+
+                children: [
+
+                  {
+
+                    user_name: "李六",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李七",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李十",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李十一",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李十二",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李十三",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李六",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李七",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李十",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李十一",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李十二",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李十三",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                ]
+
+              },
+
+              {
+
+                user_name: "李六",
+
+                lineColor: "#999999", 
+
+                strokeColor: "#1E9FFF", 
+
+                fillColor: "#1E9FFF", 
+
+                employee_id: "",
+
+                radius: 4,
+
+                children: [
+
+                  {
+
+                    user_name: "李八",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李九",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李六",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李七",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李十",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李十一",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李十二",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                  {
+
+                    user_name: "李十三",
+
+                    lineColor: "#999999", 
+
+                    strokeColor: "#1E9FFF", 
+
+                    fillColor: "#1E9FFF", 
+
+                    employee_id: "",
+
+                    radius: 4,
+
+                  },
+
+                ]
+
+              },
+
+            ]
+
+          },
+
+        ]
+
+      };
+
+ 
+
+      creatTree();
+
+ 
+
+      function creatTree(){  //直方图
+
+        $("#tree-container").html('');
+
+        var boxWidth = $("#tree-container").width();
+
+        var boxHeight = $("#tree-container").height();
+
+ 
+
+        var margin = {top: 30, right: 120, bottom: 30, left: 120},
+
+        width  = boxWidth - margin.right - margin.left,
+
+        height = boxHeight  - margin.top   - margin.bottom;
+
+    
+
+        var i = 0;
+
+    
+
+        var tree = d3.layout.tree() //创建树图布局
+
+          .nodeSize([20, 100]); //为树设置 size ，您正在设置固定的大小,节点可能会发生重叠。如果你想要 nodeSize 工作，你不能有固定的树大小 。如果您声明一个 nodeSize ，则不要声明 size 。
+
+    
+
+        var zoom = d3.behavior.zoom() //创建zoom行为
+
+            .scaleExtent([0.1, 10]) //设置缩放范围
+
+            .on("zoom", zoomed); //zoom事件发生时调用zoomed函数
+
+ 
+
+        var diagonal = d3.svg.diagonal() //新建一个对角线生成器。
+
+          .projection(function(d) { return [d.y, d.x]; });
+
+    
+
+        var svg = d3.select("#tree-container").append("svg")
+
+          .attr("width", width + margin.right + margin.left)
+
+          .attr("height", height + margin.top + margin.bottom)
+
+          .call(zoom)
+
+          .append("g")
+
+          .attr("id","g_main")
+
+          .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+
+    
+
+        var root = treeData;
+
+        console.log(root);
+
+        updates(root);
+
+    
+
+        function zoomed() { //改变svg的位置，缩放量
+
+             svg.attr("transform","translate("+d3.event.translate+")scale("+d3.event.scale+")");
+
+        }
+
+    
+
+        function updates(source) { //创建节点
+
+    
+
+          // Compute the new tree layout.
+
+            var nodes = tree.nodes(root).reverse(),
+
+                links = tree.links(nodes);
+
+    
+
+          // Normalize for fixed-depth.
+
+            nodes.forEach(function(d) { d.y = d.depth * 120; });
+
+    
+
+          // Declare the nodes…
+
+            var node = svg.selectAll("g.node")
+
+                .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+    
+
+            // Enter the nodes.
+
+            var nodeEnter = node.enter().append("g")
+
+                .attr("class", "node")
+
+                .attr("id",function(d){
+
+                  return "node"+d.employee_id;
+
+                })
+
+                .attr("transform", function(d) {
+
+                    return "translate(" + d.y + "," + d.x + ")";
+
+                });
+
+    
+
+            nodeEnter.append("circle")
+
+            .attr("r", function(d) {
+
+                return d.radius;
+
+            })
+
+            .style("fill", function(d) {
+
+                return d.fillColor;
+
+            })
+
+            .style("stroke", function(d) {
+
+                return d.strokeColor;
+
+            });
+
+    
+
+            nodeEnter.append("text")
+
+                .attr("x", function(d) {
+
+                    return d.children || d._children ? (15) * -1 : + 15
+
+                })
+
+                .attr("dy", ".35em")
+
+                .attr("text-anchor", function(d) {
+
+                    return d.children || d._children ? "end" : "start";
+
+                })
+
+                .text(function(d) {
+
+                    //console.log(d.user_name);
+
+                    return d.user_name;
+
+                })
+
+                .style("fill-opacity", 1);
+
+    
+
+            // Declare the links…
+
+            var link = svg.selectAll("path.link")
+
+                .data(links, function(d) { return d.target.id; });
+
+    
+
+            // Enter the links.
+
+            link.enter().insert("path", "g")
+
+                .attr("class", "link")
+
+                .style("stroke", function(d) { return d.target.lineColor; })
+
+                .attr("d", diagonal);
+
+        }
+
+    
+
+      }
+
+ 
+
+    </script>
+
+  </body>
+
+
+
+
+   
+          <br><br><br><br><br><br>
+
+          <h2 style="font-family:Cambria, 'Hoefler Text', 'Liberation Serif', Times, 'Times New Roman', 'serif'" >
+
+             天下分久必合，合久必分。<br><br></h2>
+
+        <h3 style="text-align: right">《三国演义》——罗贯中&nbsp; </h3>
+
+  </div>
+
+</div>  
+
+</div>
+
+    
+
+    <div class="centre">  <p class="typeing" >话说天下大势，分久必合，合久必分————《三国演义》</p></div>
+
+<br> 
+
+<div class="footer" style="text-align: center">  
+
+<a href="https://baike.baidu.com/item/三国演义/5782"> <button class="button">三国演义百度百科</button></a>
+
+<a href="https://baike.baidu.com/item/刘备/30564"> <button class="button">刘备</button></a>
+
+ <a href="https://baike.baidu.com/item/曹操/6772"> <button class="button">曹操</button></a>
+
+ <a href="https://baike.baidu.com/item/孙权/17337"> <button class="button">孙权</button></a>
+
+ <a href="https://baike.baidu.com/item/司马炎"> <button class="button">司马炎</button></a>
+
+     <strong>友情链接</strong>
+
+ <a href="https://baike.baidu.com/item/诸葛亮/21048"> <button class="button">诸葛亮</button></a>
+
+ <a href="https://baike.baidu.com/item/周瑜/17342"> <button class="button">周瑜</button></a>
+
+ <a href="https://baike.baidu.com/item/张飞/3622"> <button class="button">张飞</button></a>  
+
+ <a href="https://baike.baidu.com/item/关羽/17338"> <button class="button">关羽</button></a> 
+
+ <a href="https://baike.baidu.com/item/吕布/9592"> <button class="button">吕布</button></a> 
+
+
+
+
+
+</div>
+
+
+
+</body>
+
+</html>

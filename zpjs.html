@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>作品介绍👍</title>
+<style>
+* {
+   box-sizing: border-box;
+}
+ 
+body {
+   font-family: Arial;
+   padding: 10px;
+   background: #f1f1f1;
+}
+ 
+/* 头部标题 */
+.header {
+  padding: 5px;
+  text-align: center;
+  background: white;
+}
+ 
+.header h1 {
+   font-size: 50px;
+}
+ 
+/* 导航条 */
+.topnav {
+   overflow: hidden;
+   background-color: #333;
+}
+ 
+/* 导航条链接 */
+.topnav a {
+   float: left;
+   display: block;
+   color: #f2f2f2;
+   text-align: center;
+   padding: 14px 16px;
+   text-decoration: none;
+}
+ 
+/* 链接颜色修改 */
+.topnav a:hover {
+   background-color: #ddd;
+   color: black;
+}
+ 
+
+.leftcolumn {   
+   float: left;
+   width: 75%;
+}
+ 
+.rightcolumn {
+   float: left;
+   width: 25%;
+   background-color: #f1f1f1;
+   padding-left: 20px;
+}
+ 
+/* 图像部分 */
+.fakeimg {
+    background-color: #aaa;
+    padding:5px;
+    width: 100%;
+    height: 400px;
+    float:left;
+}
+    .fakeimg1 {
+    background-color: #aaa;
+    padding:5px;
+    width: 100%;
+    height: auto;
+}
+
+    .fakeimg2 {
+    background-color: #aaa;
+    padding:5px;
+    width: 100%;
+    height:550px;
+}
+ 
+/* 文章卡片效果 */
+.card {
+   background-color: white;
+   padding: 20px;
+   margin-top: 20px;
+}
+ 
+/* 列后面清除浮动 */
+.row:after {
+   content: "";
+   display: table;
+   clear: both;
+}
+ 
+/* 底部 */
+.footer {
+   padding: 20px;
+   text-align: center;
+   background: #ddd;
+   margin-top: 20px;
+}
+ 
+/* 响应式布局 - 屏幕尺寸小于 800px 时，两列布局改为上下布局 */
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn {   
+    width: 100%;
+    padding: 0;
+  }
+}
+ 
+/* 响应式布局 -屏幕尺寸小于 400px 时，导航等布局改为上下布局 */
+@media screen and (max-width: 400px) {
+  .topnav a {
+    float: none;
+    width: 100%;
+  }
+}
+    .bookborder{
+        border:2px auto;
+    }
+</style>
+</head>
+<body>
+    <script type="text/javascript" src="me.js" ></script>
+
+<div class="header">
+  <h1>作品介绍🎐</h1>
+  <p style="font-family:KaiTI;font-size:18px;">
+	<strong>旨在对《三国演义》的人物关系进行丰富多维立体的展示</strong></p>
+  </div>
+
+<div class="topnav">
+  <a href="#">📕数据呈现</a>
+  <a href="#">软件应用</a>
+  <a href="#">🌱作品简单呈现</a>
+  <a href="#">🍁作品完善</a>
+
+</div>
+
+<div class="row">
+  <div class="leftcolumn">
+    <div class="card">
+      <h2>数据呈现</h2>
+      <h5>2019年 12月2日— 2020年 1月12日</h5>
+      <div class="fakeimg" style="height:480px;">
+	<img src="sjcx1.png" height="100%"width=99.6%">
+        </div>
+      <p><strong>&nbsp</strong></p>
+	<p><strong style="font-family:STZhongsong;font-size:18px;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp进行爬虫，获取数据,对数据的正确性进行检验，初步把握人物关系、所占权重。</strong></p>
+     </div>
+
+
+    <div class="card"> 
+      <div class="fakeimg" >
+        <img src="sjcx2.png" height="100%"width="49.7%">
+        <img src="sjcx3.png" height="100%"width="49.7%">
+        </div>
+      <p><strong>&nbsp</strong></p>
+	<p><strong style="font-family:STZhongsong;font-size:18px;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp原始数据列表，按照魏国、蜀国、吴国进行分组，主要人物数据为主，其他人物数据为辅。</strong></p>
+     </div>
+
+
+    <div class="card"> 
+      <div class="fakeimg" >
+        <img src="sjcx4.png" height="100%"width="99.8%">
+        </div>
+      <p><strong>&nbsp</strong></p>
+      <p><strong style="font-family:STZhongsong;font-size:18px;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp通过对《三国演义》原文及其互联网相关资源信息的数据爬取、关键字搜索等，我们提取出了三国人物的姓名、所属国家、相关历史事件、社会关系、出现次数等人物信息，得到了容量2000余的数据量。在对复杂的海量数据集进行深入洞察分析后，进行数据整合，将这些原始数据以表格和CSV文件进行呈现，同时，利用SQL数据库和EXCEL等软件对其进行筛选和分类处理。</strong></p>
+     </div>
+
+    <div class="card">
+      <h2>软件应用</h2>
+      <h5>2020年 1月13日— 2020年 2月24日</h5>
+      <h2 style="color:#f08080;font-size:20px;font-family:Times New Roman;text-align:center;">Gephi</h2>
+      <div class="fakeimg" style="height:450px;text-align: center">
+        <img src="rjyy1.png" height="100%"width="99.6%">
+      </div>
+      <p><strong>&nbsp</strong></p>
+      <p><strong style="font-family:STZhongsong;font-size:18px;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp以人物姓名、生卒年、社会关系、出现次数为基点，构建节点数据和边界数据，利用Gephi进行探索性数据分析，生成人物关系交互可视化图谱，检测数据提取的正确性。同时利用Gephi生成三国人物关系变化的时间轴，展示人物的个人发展和主要事迹。</strong></p>
+      </div>
+
+
+    <div class="card">
+      <h2 style="color:#f08080;font-size:20px;font-family:Times New Roman;text-align:center;">FineBI</h2>
+      <div class="fakeimg" style="height:400px;text-align: center">
+        <img src="rjyy2.png" height="100%"width="99.6%">
+      </div>
+      <p><strong>&nbsp</strong></p>
+      <p><strong style="font-family:STZhongsong;font-size:18px;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp利用FineBI对三国人物关系进行进一步分析，运用HTML和CSS技术构建三国关键性事件时间轴，展现三国时期从黄巾起义到三国归晋的几个重要事件节点。</strong></p>
+    </div>
+
+    <div class="card">
+      <h2 style="color:#f08080;font-size:20px;font-family:STSong;text-align:center;">JavaScript力导向图</h2>
+      <div class="fakeimg" style="height:400px;text-align: center">
+        <img src="rjyy3.png" height="100%"width="99.8%">
+      </div>
+      <p><strong>&nbsp</strong></p>
+      <p><strong style="font-family:STZhongsong;font-size:18px;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp基于JavaScript力导向图技术与人物关系图结合，配合人物姓名、社会关系、所占权重，展现三国人物关系，通过节点明暗，人物与人物间连线颜色和粗细，可显示某人物的具体社会关系，简洁直观，通俗易懂。</strong></p>
+    </div>
+
+    <div class="card">
+      <h2>作品简单呈现</h2>
+      <h5>2020年 2月25日— 2020年 4月16日</h5>
+      <h2 style="color:#f08080;font-size:24px;font-family:Times New Roman;text-align:center;">Gephi</h2>
+      <div class="fakeimg2" >
+        <img src="zpjdcx1.png" height="100%"width="99%">
+      </div>
+      <p><strong>&nbsp</strong></p>
+      </div>
+
+
+    <div class="card">
+      <h2 style="color:#f08080;font-size:24px;font-family:Times New Roman;text-align:center;">FineBI</h2>
+      <div class="fakeimg" style="height:480px;text-align: center">
+        <img src="zpjdcx2.png" height="100%"width="99.8%">
+      </div>
+      <p><strong>&nbsp</strong></p>
+    </div>
+
+    <div class="card">
+      <h2 style="color:#f08080;font-size:24px;font-family:STSong;text-align:center;">JavaScript力导向图</h2>
+      <div class="fakeimg" style="height:480px;text-align: center">
+        <img src="zpjdcx3.png" height="100%"width="99.8%">
+      </div>
+      <p><strong>&nbsp</strong></p>
+    </div>
+
+    <div class="card">
+      <h2>作品完善</h2>
+      <h5>2020年 4月17日— 2020年 5月15日</h5>
+      <div class="fakeimg" style="height:480px;text-align: center">
+        <img src="zpws1.png" height="100%"width="99%">
+      </div>
+      <p><strong>&nbsp</strong></p>
+      <p><strong style="font-family:STZhongsong;font-size:18px;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp修改完善作品细节，从各个方面，各个角度，对三国的人物关系进行多方位的展示，让使用者可以清晰地了解到三国演义之中盘根错节的人际关系。</strong></p>
+      </div>
+
+  </div>
+
+
+  <div class="rightcolumn">
+    <div class="card">
+      <h2>其他说明</h2>
+	<h3>数据爬虫</h3>
+        <div class="fakeimg1">
+	<img src="qtsm1.png" width="100%"height="100%">
+	</div>
+        <p>&nbsp</p>
+    </div>
+
+    <div class="card">
+      <div class="fakeimg1">
+	<img src="qtsm2.png"width="100%">
+	</div>
+        <p>&nbsp</p>
+    </div>
+
+    <div class="card">
+      <div class="fakeimg1">
+	<img src="qtsm3.png"width="100%">
+	</div>
+        <p>&nbsp</p>
+    </div>
+
+    <div class="card">
+      <div class="fakeimg1">
+	<img src="qtsm4.png"width="100%">
+	</div>
+        <p>&nbsp</p>
+    </div>
+  
+    <div class="card">
+	<h3>力导向图</h3>
+        <div class="fakeimg1">
+	<img src="qtsm5.png" width="100%"height="100%">
+	</div>
+    </div>
+
+    <div class="card">
+      <div class="fakeimg1">
+	<img src="qtsm6.png"width="100%"height="100%">
+	</div>
+    </div>
+
+
+    <div class="card">
+      <div class="fakeimg1">
+	<img src="qtsm7.png"width="100%"height="100%">
+	</div>
+    </div>
+
+    <div class="card">
+	<h3>尝试Tableau软件</h3>
+        <div class="fakeimg1">
+	<img src="qtsm8.png" width="100%"height="100%">
+	</div>
+    </div>
+
+    <div class="card">
+	<h3>FineBI软件</h3>
+        <div class="fakeimg1">
+	<img src="qtsm9.png" width="100%"height="100%">
+	</div>
+    </div>
+
+
+
+  </div>
+</div>
+
+<div class="footer">
+  <h2>谢谢大家！ 🍀</h2>
+</div>
+
+</body>
+</html>
